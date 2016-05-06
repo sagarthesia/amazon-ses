@@ -63,15 +63,13 @@ class UserController extends Controller
                 $m->attach($filePath);
             });
         }
-        if(count(Mail::failures()) > 0){
-			Session::flash('message', 'Failed to send email, please try again.'); 
-			Session::flash('alert-class', 'alert-danger'); 
-		}
-		else
-		{
-			Session::flash('message', 'Email send successfully!'); 
-			Session::flash('alert-class', 'alert-success'); 
-		}
+        if (count(Mail::failures()) > 0) {
+            Session::flash('message', 'Failed to send email, please try again.');
+            Session::flash('alert-class', 'alert-danger');
+        } else {
+            Session::flash('message', 'Email send successfully!');
+            Session::flash('alert-class', 'alert-success');
+        }
         return redirect('/');
     }
 }
