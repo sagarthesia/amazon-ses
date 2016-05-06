@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <link rel="icon" href="{{ asset('/favicon.ico') }}">
 
-    <title>Sticky Footer Navbar Template for Bootstrap</title>
+    <title>Amazon SES</title>
 
     <!-- Bootstrap core CSS -->
     <link href="{{ asset('/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -59,9 +59,9 @@
         <h3>Users</h3>
       </div>
       <div class="row">
-		  @if(Session::has('message'))
-<p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
-@endif
+		@if(Session::has('message'))
+			<p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
+		@endif
 		  <div class="col-md-12">
 			  <button id="sendmail" type="button" class="btn btn-primary" >Send email</button>
 		  </div>
@@ -137,7 +137,7 @@
 						<input type="text" class="form-control" id="subject" name="subject" required>
 					  </div>
 					  <div class="form-group">
-						<label for="pwd">Body will be taken from blad templete file : amazon-ses/resources/views/emails/reminder.blade.php </label>
+						<label for="pwd">Body will be taken from blade templete file : amazon-ses/resources/views/emails/reminder.blade.php </label>
 					  </div>
 					  <div class="form-group">
 						<label for="pwd">Attachment:</label>
