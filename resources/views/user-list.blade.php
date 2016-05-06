@@ -59,6 +59,9 @@
         <h3>Users</h3>
       </div>
       <div class="row">
+		  @if(Session::has('message'))
+<p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
+@endif
 		  <div class="col-md-12">
 			  <button id="sendmail" type="button" class="btn btn-primary" >Send email</button>
 		  </div>
@@ -68,10 +71,9 @@
 			  <table id="data-table-simple" class="display" cellspacing="0" width="100%">
 				  <thead>
 					  <tr>
-							<th><INPUT type="checkbox" onchange="checkAll(this)" name="chk[]" /></th>
+							<th class="no-sort"><INPUT type="checkbox" onchange="checkAll(this)" name="chk[]" /></th>
 						    <th>First Name</th>
 							<th>Last Name</th>
-							<th>Address</th>
 							<th>City</th>
 							<th>State</th>
 							<th>Zip</th>
@@ -84,7 +86,6 @@
 						  <th></th>
 						  <th>First Name</th>
 						  <th>Last Name</th>
-						  <th>Address</th>
 						  <th>City</th>
 						  <th>State</th>
 						  <th>Zip</th>
@@ -94,54 +95,13 @@
 			   
 				  <tbody>
 					<tr>
-						<td><INPUT class="chk" type="checkbox" name="checkbox[]" value="sagar.t.php@gmail.com"/></td>
-						<td>Test</td>
-						<td>Test</td>
-						<td>Test</td>
-						<td>Test</td>
-						<td>Test</td>
-						<td>Test</td>
-						<td>Test</td>
-					</tr>
-					<tr>
-						<td><INPUT class="chk" type="checkbox" name="checkbox[]" value="sagar.t.php@gmail.com"/></td>
-						<td>Test</td>
-						<td>Test</td>
-						<td>Test</td>
-						<td>Test</td>
-						<td>Test</td>
-						<td>Test</td>
-						<td>Test</td>
-					</tr>
-					<tr>
-						<td><INPUT class="chk" type="checkbox" name="checkbox[]" value="sagar.t.php@gmail.com"/></td>
-						<td>Test</td>
-						<td>Test</td>
-						<td>Test</td>
-						<td>Test</td>
-						<td>Test</td>
-						<td>Test</td>
-						<td>Test</td>
-					</tr>
-					<tr>
-						<td><INPUT class="chk" type="checkbox" name="checkbox[]" value="sagar.t.php@gmail.com"/></td>
-						<td>Test</td>
-						<td>Test</td>
-						<td>Test</td>
-						<td>Test</td>
-						<td>Test</td>
-						<td>Test</td>
-						<td>Test</td>
-					</tr>
-					<tr>
-						<td><INPUT class="chk" type="checkbox" name="checkbox[]" value="sagar.t.php@gmail.com"/></td>
-						<td>Test</td>
-						<td>Test</td>
-						<td>Test</td>
-						<td>Test</td>
-						<td>Test</td>
-						<td>Test</td>
-						<td>Test</td>
+						<td><INPUT class="chk" type="checkbox" name="checkbox[]" value="thota2237@gmail.com"/></td>
+						<td>Amara</td>
+						<td>Thota</td>
+						<td>Rajkot</td>
+						<td>Gujarat</td>
+						<td>360002</td>
+						<td>thota2237@gmail.com</td>
 					</tr>
 					</tbody>
 			  </table>
@@ -177,12 +137,11 @@
 						<input type="text" class="form-control" id="subject" name="subject" required>
 					  </div>
 					  <div class="form-group">
-						<label for="pwd">Body:</label>
-						<textarea name="body" id="body" class="form-control"></textarea>
+						<label for="pwd">Body will be taken from blad templete file : amazon-ses/resources/views/emails/reminder.blade.php </label>
 					  </div>
 					  <div class="form-group">
 						<label for="pwd">Attachment:</label>
-						<input type="file" name="attachment[]" multiple>
+						Attachment will be takes from : amazon-ses/public/upload, attached file is : Running_Horses_.jpg
 					  </div>
 					
 				</div>
@@ -228,6 +187,13 @@
 			 }
 		 }
 		 $(document).ready(function(){
+			$('#data-table-simple').DataTable({
+				"columnDefs": [ {
+                  "targets": 'no-sort',
+                  "orderable": false,
+				} ],
+				"aaSorting": [[1,'asc']]
+			});
             $("#sendmail").on( "click", function() {
                 if ($('.chk:checked').length) {
 				  var chkId = '';

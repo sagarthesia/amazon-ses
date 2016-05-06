@@ -34,10 +34,9 @@ return [
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],
-	
-	'ses' => [
+    'ses' => [
 		'key' => 'AKIAIWFAK5WXRB4IC7YQ',
 		'secret' => 'GjchcoTO4cdxM5D4298mWxynNQDQm7STEKMGaeZ/',
-		'region' => 'us-west-2',  // e.g. us-east-1
+		'region' => 'us-east-1',  // e.g. us-east-1
 	],
 ];

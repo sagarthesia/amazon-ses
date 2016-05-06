@@ -20,6 +20,7 @@ use Illuminate\Http\Request;
 use Mail;
 use Input;
 use App\User;
+use Session;
 use App\Http\Controllers\Controller;
 
 class UserController extends Controller
@@ -53,15 +54,24 @@ class UserController extends Controller
     {
         /* Get all the request params in driver variable**/
         $user = $request->all();
-        //$file = Input::file('attachment');
-        //$file = array('image' => Input::file('attachment'));
         $alluser = explode(',', $user['emails']);
+        $filePath = base_path().'/public/upload/Running_Horses_.jpg';
         foreach ($alluser as $k => $val) {
-            Mail::send('emails.reminder', ['user' => $alluser], function ($m) use ($alluser, $val, $user) {
-                $m->from('amar2237@gmail.com', 'Amazon SES');
+            Mail::send('emails.reminder', ['user' => $alluser], function ($m) use ($alluser, $val, $user, $filePath) {
+                $m->from('thota2237@gmail.com', 'Amazon SES');
                 $m->to($val)->subject($user['subject']);
+                $m->attach($filePath);
             });
         }
+        if(count(Mail::failures()) > 0){
+			Session::flash('message', 'Failed to send email, please try again.'); 
+			Session::flash('alert-class', 'alert-danger'); 
+		}
+		else
+		{
+			Session::flash('message', 'Email send successfully!'); 
+			Session::flash('alert-class', 'alert-success'); 
+		}
         return redirect('/');
     }
 }
